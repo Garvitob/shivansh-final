@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivansh Properties — One stop for every property need in Noida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F6F0;
+    --tint:#F1EEE4;
+    --surface:#FCFBF7;
+    --ink:#262319;
+    --muted:#75705F;
+    --line:#E3DFD1;
+    --deep:#211F19;
+    --on-deep:#EFEADC;
+    --on-deep-muted:#A69F8C;
+    --brass:#A5843E;
+    --brass-soft:#C4A25C;
+    --radius:3px;
+  }
+  .dark{
+    --bg:#111110;
+    --tint:#171716;
+    --surface:#1A1A19;
+    --ink:#EBE8E0;
+    --muted:#98948A;
+    --line:#282826;
+    --deep:#0B0B0A;
+    --on-deep:#EBE8E0;
+    --on-deep-muted:#8F8B81;
+    --brass:#C9A75F;
+    --brass-soft:#D9BC7E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Archivo',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .35s ease,color .35s ease}
+  ::selection{background:var(--brass);color:#fff}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--brass)}
+  a{color:inherit;text-decoration:none}
+
+  header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line);transition:background .35s ease}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .wordmark{display:flex;flex-direction:column;line-height:1.05}
+  .wordmark .top{font-family:'Fraunces',serif;font-weight:600;font-size:19px}
+  .wordmark .bottom{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:2px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-size:13.5px;font-weight:500;color:var(--muted);position:relative;padding:4px 0}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--brass);transition:width .25s ease}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .btn-call{background:var(--ink);color:var(--bg);font-size:13px;font-weight:600;letter-spacing:.03em;padding:10px 18px;border-radius:var(--radius);transition:opacity .2s;white-space:nowrap}
+  .btn-call:hover{opacity:.85}
+  .theme-toggle{background:none;border:1px solid var(--line);border-radius:var(--radius);color:var(--muted);font-family:'Archivo',sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:9px 12px;cursor:pointer;transition:all .2s}
+  .theme-toggle:hover{border-color:var(--brass);color:var(--brass)}
+  .menu-btn{display:none;background:none;border:none;color:var(--ink);cursor:pointer;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;font-family:'Archivo',sans-serif}
+
+  /* ---------- photo hero: v4's lighter overlay, bigger premium type ---------- */
+  .hero{
+    position:relative;min-height:82vh;display:flex;align-items:center;
+    background-color:#26221B;background-size:cover;background-position:center;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(100deg, rgba(18,16,11,.78) 0%, rgba(18,16,11,.45) 48%, rgba(18,16,11,.12) 100%);
+  }
+  .hero-inner{position:relative;z-index:2;padding:120px 0 140px;max-width:900px;color:#F6F3EB}
+  .hero .eyebrow{color:var(--brass-soft);font-size:11.5px;letter-spacing:.26em;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(44px,6.6vw,82px);line-height:1.05;letter-spacing:-.015em;
+    max-width:14ch;margin-top:20px;
+    text-shadow:0 2px 24px rgba(0,0,0,.35);
+  }
+  .hero h1 em{font-style:italic;color:var(--brass-soft)}
+  .hero-sub{
+    margin-top:30px;max-width:50ch;color:rgba(246,243,235,.95);
+    font-size:18px;line-height:1.75;font-weight:500;
+    text-shadow:0 1px 14px rgba(0,0,0,.4);
+  }
+  .hero-actions{margin-top:46px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn-primary{background:#F6F3EB;color:#211F19;font-weight:600;font-size:14.5px;letter-spacing:.02em;padding:16px 30px;border-radius:var(--radius);transition:transform .15s ease,opacity .2s;box-shadow:0 4px 22px rgba(0,0,0,.22)}
+  .btn-primary:hover{opacity:.92;transform:translateY(-1px)}
+  .btn-ghost-hero{border:1px solid rgba(246,243,235,.55);color:#F6F3EB;font-weight:500;font-size:14.5px;padding:15px 28px;border-radius:var(--radius);transition:border-color .2s,color .2s;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+  .btn-ghost-hero:hover{border-color:var(--brass-soft);color:var(--brass-soft)}
+  .link-hero{font-weight:500;font-size:14.5px;color:#F6F3EB;border-bottom:1px solid var(--brass-soft);padding-bottom:2px;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+  .link-hero:hover{color:var(--brass-soft)}
+  .hero-credit{position:absolute;z-index:2;right:24px;bottom:14px;font-size:10.5px;color:rgba(246,243,235,.55);font-style:italic;font-family:'Fraunces',serif}
+
+  .facts{border-bottom:1px solid var(--line)}
+  .facts-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 28px;padding:22px 0;font-size:13px;color:var(--muted);font-weight:500}
+  .facts-inner span b{color:var(--ink);font-weight:600}
+  .facts-inner .dot{color:var(--brass)}
+
+  section{padding:96px 0}
+  .sec-head{margin-bottom:56px;max-width:640px}
+  .sec-head h2,.h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.01em;margin-top:14px}
+  .sec-head p{margin-top:16px;color:var(--muted);font-size:15.5px;max-width:56ch}
+
+  .services{border-bottom:1px solid var(--line)}
+  .svc-grid{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,2fr);gap:60px}
+  .svc-left{position:sticky;top:110px;align-self:start}
+  .svc-left p.sub{margin-top:16px;color:var(--muted);font-size:15px;max-width:34ch}
+  .svc-rows{display:flex;flex-direction:column}
+  .svc-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.6fr) auto;gap:8px 28px;align-items:baseline;padding:26px 0;border-top:1px solid var(--line);transition:padding-left .25s ease}
+  .svc-row:last-child{border-bottom:1px solid var(--line)}
+  .svc-row:hover{padding-left:10px}
+  .svc-row h3{font-family:'Fraunces',serif;font-weight:500;font-size:22px}
+  .svc-row p{color:var(--muted);font-size:14.5px;line-height:1.6}
+  .svc-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);font-weight:600;white-space:nowrap;justify-self:end}
+
+  .photo-band{position:relative;height:440px;background-color:#1A1813;background-size:cover;background-position:center}
+  .band-caption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg, rgba(16,14,10,0) 0%, rgba(16,14,10,.8) 100%);padding:80px 0 26px;color:#F6F3EB}
+  .band-caption .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
+  .band-caption p{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(17px,2.2vw,22px)}
+  .band-caption small{font-size:10.5px;color:rgba(246,243,235,.55);font-style:italic;font-family:'Fraunces',serif}
+
+  .sectors{background:var(--tint);border-bottom:1px solid var(--line);transition:background .35s ease}
+  .sector-wall{display:flex;flex-wrap:wrap;column-gap:.55em;row-gap:.1em;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(52px,8.5vw,110px);line-height:1.12;letter-spacing:-.02em}
+  .sector-wall a{color:var(--ink);opacity:.26;transition:opacity .25s ease,color .25s ease;position:relative}
+  .sector-wall a:hover{opacity:1;color:var(--brass)}
+  .sector-wall a.home{opacity:1;color:var(--brass)}
+  .sector-wall a.home sup{font-family:'Archivo',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;position:absolute;top:.9em;right:-6px;transform:translateX(100%);color:var(--muted)}
+  .sector-foot{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 34px;justify-content:space-between;align-items:baseline;color:var(--muted);font-size:14px}
+  .sector-foot .also b{color:var(--ink);font-weight:600}
+
+  .roastery{border-bottom:1px solid var(--line)}
+  .roast-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:64px;align-items:start}
+  .roast-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(26px,3.4vw,40px);line-height:1.28;letter-spacing:-.01em;border-left:2px solid var(--brass);padding-left:28px}
+  .roast-copy p{color:var(--muted);font-size:15.5px;line-height:1.75;margin-bottom:16px}
+  .roast-copy p b{color:var(--ink);font-weight:600}
+  .link-plain{font-weight:500;font-size:14px;color:var(--ink);border-bottom:1px solid var(--brass);padding-bottom:2px;transition:color .2s}
+  .link-plain:hover{color:var(--brass)}
+
+  .enquiry{background:var(--tint);border-bottom:1px solid var(--line);transition:background .35s ease}
+  .enq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:70px;align-items:start}
+  .enq-left h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.4vw,42px);line-height:1.15;margin-top:14px}
+  .enq-left p{margin-top:18px;color:var(--muted);font-size:15.5px;max-width:44ch;line-height:1.7}
+  .enq-contact{margin-top:34px;display:flex;flex-direction:column;gap:10px;font-size:15px}
+  .enq-contact a{border-bottom:1px solid var(--line);align-self:flex-start;padding-bottom:1px}
+  .enq-contact a:hover{border-color:var(--brass);color:var(--brass)}
+  .form-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:40px 36px;transition:background .35s ease}
+  .form{display:grid;grid-template-columns:1fr 1fr;gap:26px 24px}
+  .f-field{display:flex;flex-direction:column;gap:8px}
+  .f-field.full{grid-column:1 / -1}
+  .f-field label{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+  .f-field input,.f-field select,.f-field textarea{background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--ink);font-family:'Archivo',sans-serif;font-size:15.5px;padding:8px 2px 10px;outline:none;border-radius:0;transition:border-color .2s}
+  .f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--brass)}
+  .f-field textarea{resize:vertical;min-height:64px}
+  .form-actions{grid-column:1 / -1;display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:6px}
+  .btn-submit{background:var(--ink);color:var(--bg);border:none;cursor:pointer;font-family:'Archivo',sans-serif;font-weight:600;font-size:14px;letter-spacing:.02em;padding:15px 30px;border-radius:var(--radius);transition:transform .15s ease,opacity .2s}
+  .btn-submit:hover{opacity:.9;transform:translateY(-1px)}
+  .form-note{font-size:12.5px;color:var(--muted)}
+  .form-success{grid-column:1 / -1;font-family:'Fraunces',serif;font-style:italic;font-size:19px;line-height:1.5;color:var(--ink);display:none;padding:16px 0 0}
+
+  .guides{border-bottom:1px solid var(--line)}
+  .guide-rows{display:flex;flex-direction:column}
+  .guide-row{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 0;border-top:1px solid var(--line);transition:padding-left .25s ease}
+  .guide-row:last-child{border-bottom:1px solid var(--line)}
+  .guide-row:hover{padding-left:10px}
+  .guide-row:hover .g-arrow{color:var(--brass);transform:translateX(4px)}
+  .guide-row h3{font-family:'Fraunces',serif;font-weight:500;font-size:20px}
+  .g-arrow{color:var(--muted);font-size:18px;transition:transform .2s,color .2s}
+
+  footer{background:var(--deep);color:var(--on-deep);padding:72px 0 36px;transition:background .35s ease}
+  .foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:48px}
+  .foot-brand .top{font-family:'Fraunces',serif;font-weight:600;font-size:22px}
+  .foot-brand .tag{margin-top:10px;font-family:'Fraunces',serif;font-style:italic;color:var(--brass-soft);font-size:15px}
+  .foot-brand address{font-style:normal;margin-top:22px;color:var(--on-deep-muted);font-size:14px;line-height:1.75}
+  .foot-brand address a{color:var(--on-deep);border-bottom:1px solid rgba(235,232,224,.3)}
+  .foot-col .label{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass-soft);font-weight:600;margin-bottom:16px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .foot-col a{font-size:14px;color:var(--on-deep-muted);transition:color .2s}
+  .foot-col a:hover{color:var(--on-deep)}
+  .foot-base{margin-top:56px;padding-top:24px;border-top:1px solid rgba(235,232,224,.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--on-deep-muted)}
+
+  .mobile-menu{position:fixed;inset:0;z-index:100;background:var(--deep);color:var(--on-deep);display:none;flex-direction:column;padding:24px}
+  .mobile-menu.open{display:flex}
+  .mm-top{display:flex;justify-content:space-between;align-items:center;height:44px}
+  .mm-close{background:none;border:none;color:var(--on-deep);cursor:pointer;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;font-family:'Archivo',sans-serif}
+  .mm-links{margin-top:48px;display:flex;flex-direction:column;gap:4px}
+  .mm-links a{font-family:'Fraunces',serif;font-size:32px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(235,232,224,.12)}
+  .mm-foot{margin-top:auto;color:var(--on-deep-muted);font-size:14px;line-height:1.8}
+  .mm-foot a{color:var(--on-deep)}
+
+  .rise{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards}
+  .d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.3s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .rise{opacity:1;transform:none}
+  }
+
+  @media (max-width:960px){
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .hero{min-height:72vh}
+    .hero-inner{padding:88px 0 104px}
+    .svc-grid{grid-template-columns:1fr;gap:36px}
+    .svc-left{position:static}
+    .svc-row{grid-template-columns:1fr;gap:6px}
+    .svc-tag{justify-self:start;order:-1}
+    .photo-band{height:340px}
+    .roast-grid{grid-template-columns:1fr;gap:40px}
+    .enq-grid{grid-template-columns:1fr;gap:48px}
+    .form-card{padding:30px 24px}
+    .foot-grid{grid-template-columns:1fr;gap:40px}
+  }
+  @media (max-width:560px){
+    section{padding:72px 0}
+    .form{grid-template-columns:1fr}
+    .facts-inner{flex-direction:column;gap:10px}
+    .btn-call{padding:9px 14px}
+    .photo-band{height:280px}
+    .hero::before{background:linear-gradient(180deg, rgba(18,16,11,.5) 0%, rgba(18,16,11,.62) 100%)}
+    .hero h1{font-size:clamp(38px,10vw,52px)}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="wordmark" aria-label="Shivansh Properties — home">
+      <span class="top">Shivansh</span>
+      <span class="bottom">Properties</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#sectors">Sectors</a>
+      <a href="#">Expressway</a>
+      <a href="#">Listings</a>
+      <a href="#guides">Guides</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">Dark</button>
+      <a class="btn-call" href="tel:+919911559688">Call 99115 59688</a>
+      <button class="menu-btn" id="menuOpen" aria-label="Open menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu">
+  <div class="mm-top">
+    <span class="wordmark"><span class="top">Shivansh</span><span class="bottom" style="color:var(--on-deep-muted)">Properties</span></span>
+    <button class="mm-close" id="menuClose">Close</button>
+  </div>
+  <nav class="mm-links">
+    <a href="#services">Services</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#">Expressway</a>
+    <a href="#">Listings</a>
+    <a href="#guides">Guides</a>
+    <a href="#">About</a>
+    <a href="#enquiry">Contact</a>
+  </nav>
+  <div class="mm-foot">
+    CM-52, Sector 144, Noida<br>
+    <a href="tel:+919911559688">99115 59688</a> · <a href="https://wa.me/919911559688">WhatsApp</a>
+  </div>
+</div>
+
+<!-- ================= PHOTO HERO (FINAL) ================= -->
+<div class="hero" id="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow rise">Noida · Since 2011</p>
+    <h1 class="rise d1">One stop for <em>every property need</em> in Noida.</h1>
+    <p class="hero-sub rise d2">Buying, selling, renting, leasing — flats, kothis, plots, offices, shops, cafes. Shivansh Properties works both sides of every deal, across all of Noida, from our office in Sector 144.</p>
+    <div class="hero-actions rise d3">
+      <a class="btn-primary" href="tel:+919911559688">Call 99115 59688</a>
+      <a class="btn-ghost-hero" href="https://wa.me/919911559688">WhatsApp us</a>
+      <a class="link-hero" href="#enquiry">Tell us what you need →</a>
+    </div>
+  </div>
+  <p class="hero-credit">Photo: Bilal Ahmad, Noida / Unsplash</p>
+</div>
+
+<!-- ================= FACTS ================= -->
+<div class="facts">
+  <div class="wrap facts-inner">
+    <span><b>Since 2011</b> in Noida</span><span class="dot">●</span>
+    <span>Office <b>inside Sector 144</b></span><span class="dot">●</span>
+    <span>All of Noida, <b>11 focus sectors</b></span><span class="dot">●</span>
+    <span>Buyer side <b>and</b> seller side</span>
+  </div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services">
+  <div class="wrap svc-grid">
+    <div class="svc-left">
+      <p class="eyebrow">What we handle</p>
+      <h2 class="h2">If it's property in Noida, it's our work.</h2>
+      <p class="sub">No handing you off. One office, one number, every kind of deal.</p>
+    </div>
+    <div class="svc-rows">
+      <div class="svc-row">
+        <h3>Buy &amp; sell residential</h3>
+        <p>Flats, kothis and plots — our main work. We know what things actually sell for.</p>
+        <span class="svc-tag">Buyers · Sellers</span>
+      </div>
+      <div class="svc-row">
+        <h3>Residential renting</h3>
+        <p>Finding tenants for owners. Finding homes for tenants. Paperwork done properly.</p>
+        <span class="svc-tag">Owners · Tenants</span>
+      </div>
+      <div class="svc-row">
+        <h3>Commercial — lease &amp; sale</h3>
+        <p>Office floors, shops, corporate and IT park space along the Expressway.</p>
+        <span class="svc-tag">Both sides</span>
+      </div>
+      <div class="svc-row">
+        <h3>Cafes &amp; restaurants</h3>
+        <p>From finding the space to opening day. Our strongest work — ask about Roastery Street.</p>
+        <span class="svc-tag">End to end</span>
+      </div>
+      <div class="svc-row">
+        <h3>PG buildings</h3>
+        <p>Owners with large spaces on one side, PG operators on the other. We sit in the middle.</p>
+        <span class="svc-tag">Owners · Operators</span>
+      </div>
+      <div class="svc-row">
+        <h3>Industrial spaces</h3>
+        <p>Lease and sale of industrial units across Noida's industrial belts.</p>
+        <span class="svc-tag">Lease · Sale</span>
+      </div>
+      <div class="svc-row">
+        <h3>Corporate &amp; brand requirements</h3>
+        <p>Banks opening branches, quick-commerce hubs, chains entering Noida — we find the site.</p>
+        <span class="svc-tag">Brands</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MID PHOTO BAND (FINAL) ================= -->
+<div class="photo-band" id="photoBand">
+  <div class="band-caption">
+    <div class="wrap">
+      <p>The Noida–Greater Noida Expressway — the corridor we work every day.</p>
+      <small>Photo: Shantanu Goyal, Noida / Unsplash</small>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SECTOR WALL ================= -->
+<section class="sectors" id="sectors">
+  <div class="wrap">
+    <p class="eyebrow">Where we work</p>
+    <h2 class="h2" style="margin-bottom:44px;max-width:22ch">Noida talks in sector numbers. So do we.</h2>
+    <div class="sector-wall" aria-label="Focus sectors">
+      <a href="#">99</a>
+      <a href="#">105</a>
+      <a href="#">108</a>
+      <a href="#">130</a>
+      <a href="#">132</a>
+      <a href="#">135</a>
+      <a href="#">141</a>
+      <a href="#">143</a>
+      <a href="#" class="home">144<sup>home</sup></a>
+      <a href="#">145</a>
+      <a href="#">151</a>
+    </div>
+    <div class="sector-foot">
+      <span>Eleven focus sectors on the Expressway — and we work across <b style="color:var(--ink)">every sector of Noida</b>.</span>
+      <span class="also">Also: <b>Greater Noida</b>, <b>YEIDA</b> and <b>Delhi NCR</b>.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROASTERY ================= -->
+<section class="roastery">
+  <div class="wrap roast-grid">
+    <p class="roast-quote">Most of the cafes on Roastery Street found their space through us.</p>
+    <div class="roast-copy">
+      <p class="eyebrow" style="margin-bottom:16px">The cafe lane, Sector 144</p>
+      <p>Sector 144's cafe lane didn't fill up by accident. For years, cafe and restaurant owners have come to us to find the right shop, settle the lease, and get the doors open.</p>
+      <p>If you're planning a cafe or restaurant anywhere in Noida, we handle it <b>end to end</b> — space, terms, and everything between you and opening day.</p>
+      <a class="link-plain" href="#enquiry">Planning a cafe? Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ENQUIRY ================= -->
+<section class="enquiry" id="enquiry">
+  <div class="wrap enq-grid">
+    <div class="enq-left">
+      <p class="eyebrow">Start here</p>
+      <h2>Tell us what you need.</h2>
+      <p>Buying, selling, renting or leasing — write two lines and we'll call you back. Or skip the form entirely and just ring.</p>
+      <div class="enq-contact">
+        <a href="tel:+919911559688">99115 59688 — call</a>
+        <a href="https://wa.me/919911559688">99115 59688 — WhatsApp</a>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form" id="enqForm">
+        <div class="f-field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" type="text" autocomplete="name">
+        </div>
+        <div class="f-field">
+          <label for="f-phone">Phone</label>
+          <input id="f-phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="f-field">
+          <label for="f-want">I want to</label>
+          <select id="f-want">
+            <option>Buy</option><option>Sell</option><option>Rent</option><option>Lease</option><option>Something else</option>
+          </select>
+        </div>
+        <div class="f-field">
+          <label for="f-type">Property type</label>
+          <select id="f-type">
+            <option>Flat</option><option>Kothi</option><option>Plot / land</option><option>Office</option><option>Shop</option><option>Cafe / restaurant</option><option>Industrial</option><option>PG building</option><option>Other</option>
+          </select>
+        </div>
+        <div class="f-field full">
+          <label for="f-sector">Sector or area</label>
+          <input id="f-sector" type="text" placeholder="e.g. Sector 135, or anywhere in Noida">
+        </div>
+        <div class="f-field full">
+          <label for="f-msg">Anything else</label>
+          <textarea id="f-msg" rows="2"></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn-submit" id="enqSubmit">Send enquiry</button>
+          <span class="form-note">Reaches our team directly.</span>
+        </div>
+        <p class="form-success" id="enqSuccess">Got it — in the live site, this lands in the database instantly. <span style="opacity:.7">(Design preview only.)</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GUIDES ================= -->
+<section class="guides" id="guides">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Plain answers</p>
+      <h2>Property questions, answered simply.</h2>
+      <p>No jargon. The things people actually ask us, written the way we'd explain them across the desk.</p>
+    </div>
+    <div class="guide-rows">
+      <a class="guide-row" href="#">
+        <h3>Stamp duty and registration in Noida — what you actually pay</h3>
+        <span class="g-arrow">→</span>
+      </a>
+      <a class="guide-row" href="#">
+        <h3>How to verify property documents in UP before buying</h3>
+        <span class="g-arrow">→</span>
+      </a>
+      <a class="guide-row" href="#">
+        <h3>Selling your property in Noida — the full process</h3>
+        <span class="g-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p class="top">Shivansh Properties</p>
+        <p class="tag">Building Trust. Creating Futures.</p>
+        <address>
+          CM-52, Sector 144, Noida,<br>
+          Uttar Pradesh 201306, India<br>
+          <a href="tel:+919911559688">+91 99115 59688</a> · <a href="https://wa.me/919911559688">WhatsApp</a>
+        </address>
+      </div>
+      <div class="foot-col">
+        <p class="label">Services</p>
+        <ul>
+          <li><a href="#services">Buy &amp; sell residential</a></li>
+          <li><a href="#services">Commercial leasing</a></li>
+          <li><a href="#services">Cafes &amp; restaurants</a></li>
+          <li><a href="#services">PG buildings</a></li>
+          <li><a href="#services">Corporate requirements</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <p class="label">Sectors</p>
+        <ul>
+          <li><a href="#sectors">Sector 144 — home</a></li>
+          <li><a href="#sectors">Sector 135</a></li>
+          <li><a href="#sectors">Sector 105 &amp; 108</a></li>
+          <li><a href="#sectors">Sector 143</a></li>
+          <li><a href="#sectors">All eleven sectors</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Shivansh Properties, Noida.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hero').style.backgroundImage="url('https://images.unsplash.com/photo-1661858435242-ed971767e954?auto=format&fit=crop&w=2200&q=80')";
+  document.getElementById('photoBand').style.backgroundImage="url('https://images.unsplash.com/photo-1645938374927-d74b9349be51?auto=format&fit=crop&w=2200&q=80')";
+
+  var root=document.documentElement;
+  var toggle=document.getElementById('themeToggle');
+  function setTheme(dark){root.classList.toggle('dark',dark);toggle.textContent=dark?'Light':'Dark'}
+  setTheme(false);
+  toggle.addEventListener('click',function(){setTheme(!root.classList.contains('dark'))});
+
+  var mm=document.getElementById('mobileMenu');
+  document.getElementById('menuOpen').addEventListener('click',function(){mm.classList.add('open')});
+  document.getElementById('menuClose').addEventListener('click',function(){mm.classList.remove('open')});
+  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
+
+  document.getElementById('enqSubmit').addEventListener('click',function(){
+    document.getElementById('enqSuccess').style.display='block';
+    this.disabled=true;this.style.opacity=.5;
+  });
+</script>
+</body>
+</html>
