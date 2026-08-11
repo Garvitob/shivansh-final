@@ -1066,6 +1066,21 @@ export const SECTORS: Sector[] = [
   },
 ];
 
+/** One-line character notes, used on the sectors index and the cornerstone page. */
+export const SECTOR_ONE_LINERS: Record<string, string> = {
+  "99": "Settled Authority housing. Resale flats, kothis and builder floors, bought by families who stay.",
+  "105": "The premium kothi belt. You are buying the plot; the house on it is negotiable.",
+  "108": "Kothis and plots on one side, Parx Laureate and Divine Meadows on the other.",
+  "130": "Low-density Expressway pocket beside the Wish Town belt. Bought for space, let to the office belt.",
+  "132": "Corporate towers with a retail street underneath. Weekday footfall, office-led.",
+  "135": "The biggest IT-park sector on the belt — and a real residential one, which is why it works.",
+  "141": "Quiet, next door to commercial 142. Less competition means more room to negotiate.",
+  "143": "High-rise societies with their own metro station. The deepest rental market on this stretch.",
+  "144": "Our home sector. Roastery Street, the Embassy business parks, and our office at CM-52.",
+  "145": "Abadi plots and ultra-luxury launches in the same sector. One metro stop from 144.",
+  "151": "The frontier. Farm plots and new launches, pointing at the airport side.",
+};
+
 /** Wall order — the reference file's order, with 144 in the middle as home. */
 export const SECTOR_WALL_ORDER = ["99", "105", "108", "130", "132", "135", "141", "143", "144", "145", "151"];
 
