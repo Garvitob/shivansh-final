@@ -27,7 +27,11 @@ const log = (line = "") => {
   console.log(line);
 };
 
-const WIDTHS = [375, 768, 1440];
+/** Override with QA_WIDTHS=360,390,412,430 to sweep real handset widths. */
+const WIDTHS = (process.env.QA_WIDTHS ?? "375,768,1440")
+  .split(",")
+  .map((w) => Number(w.trim()))
+  .filter(Boolean);
 
 const stop = await ensureServer();
 const routes = [...(await publicRoutes()), "/admin/login"];

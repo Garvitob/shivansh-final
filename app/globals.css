@@ -128,16 +128,21 @@ svg {
   border: 0;
 }
 
+/* Horizontal longhand only. `.wrap` is combined with classes that set their own
+   vertical padding (.hero-inner most of all), and a shorthand here would silently
+   reset theirs depending on source order. */
 .wrap {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .wrap-narrow {
   max-width: 820px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .eyebrow {
@@ -744,6 +749,12 @@ header.site-header {
   right: -6px;
   transform: translateX(100%);
   color: var(--muted);
+}
+
+/* The superscript hangs outside the numeral, so the wall needs room for it
+   when 144 happens to land at the end of a wrapped line. */
+.sector-wall {
+  padding-right: 44px;
 }
 
 .sector-foot {
@@ -1982,7 +1993,8 @@ footer.site-footer {
   }
   .wrap,
   .wrap-narrow {
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .theme-toggle {
     display: none;
@@ -2018,8 +2030,10 @@ footer.site-footer {
     padding-top: 76px;
     padding-bottom: 128px;
   }
+  /* Sits left on a phone so the floating WhatsApp button cannot cover it. */
   .hero-credit {
-    right: 20px;
+    left: 20px;
+    right: auto;
     bottom: 12px;
     font-size: 9.5px;
   }
@@ -2047,5 +2061,48 @@ footer.site-footer {
   }
   .band-caption {
     padding: 60px 0 20px;
+  }
+}
+
+/* Small handsets — 320 to 380. The header row is the tight constraint. */
+@media (max-width: 380px) {
+  .wrap,
+  .wrap-narrow {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .nav {
+    gap: 10px;
+  }
+  .brand {
+    gap: 8px;
+  }
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+  }
+  .wordmark .top {
+    font-size: 17px;
+  }
+  .wordmark .bottom {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+  }
+  .nav-cta {
+    gap: 8px;
+  }
+  .btn-call {
+    font-size: 12px;
+    padding: 8px 11px;
+  }
+  .menu-btn {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  .hero-credit {
+    left: 16px;
+  }
+  .sector-wall {
+    padding-right: 40px;
   }
 }
