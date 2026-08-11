@@ -11,7 +11,7 @@ import { BUSINESS } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Contact Shivansh Properties",
   description:
-    "Call or WhatsApp +91 99115 59688, or come to the office at CM-52, Sector 144, Noida, Uttar Pradesh 201306. Property dealer on the Noida Expressway since 2011.",
+    "Call or WhatsApp +91 99115 59688, or come to the office at CM-52, Sector 144, Noida 201306. Property dealer on the Noida Expressway since 2011.",
   path: "/contact",
 });
 

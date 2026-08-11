@@ -506,7 +506,7 @@ export const SERVICES: Service[] = [
     name: "Industrial spaces",
     metaTitle: "Industrial Space in Noida",
     metaDescription:
-      "Industrial units to lease or buy across Noida — Phase 2, Sectors 80 and 83, NSEZ and the Ecotech belts in Greater Noida. Power, access and approvals checked.",
+      "Industrial units to lease or buy across Noida — Phase 2, Sectors 80 and 83, NSEZ and the Ecotech belts in Greater Noida. Approvals checked.",
     eyebrow: "Service · Industrial",
     h1: "Industrial lease and sale in Noida",
     lede: "Sheds, units and industrial plots across Noida's industrial belts. This is a different market from the Expressway sectors and we treat it as one.",

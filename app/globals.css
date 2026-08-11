@@ -1805,7 +1805,7 @@ footer.site-footer {
   -webkit-overflow-scrolling: touch;
 }
 
-.tag {
+.badge {
   display: inline-block;
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -1818,7 +1818,7 @@ footer.site-footer {
   white-space: nowrap;
 }
 
-.tag.on {
+.badge.on {
   color: var(--brass);
   border-color: var(--brass);
 }

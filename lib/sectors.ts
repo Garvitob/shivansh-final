@@ -43,7 +43,7 @@ export const SECTORS: Sector[] = [
     name: "Sector 99",
     metaTitle: "Sector 99 Noida — Flats & Kothis",
     metaDescription:
-      "Buying, selling or renting in Sector 99, Noida. Authority flats, HIG blocks, kothis and builder floors — resale advice from a dealer working the sector since 2011.",
+      "Buying, selling or renting in Sector 99, Noida. Authority flats, HIG blocks, kothis and builder floors — resale advice from a local dealer.",
     eyebrow: "Sector 99 · Noida",
     h1: "Property in Sector 99, Noida",
     lede: "Sector 99 is settled Noida Authority housing — the kind of sector where people move in and stay. Most of what changes hands here is resale, and most buyers are families who want to live in the flat, not park money in it.",

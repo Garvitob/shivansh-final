@@ -81,7 +81,7 @@ export default async function AdminEnquiriesPage() {
                     ) : null}
                   </td>
                   <td>
-                    <span className={e.status === "NEW" ? "tag on" : "tag"}>
+                    <span className={e.status === "NEW" ? "badge on" : "badge"}>
                       {e.status === "NEW" ? "New" : e.status === "CONTACTED" ? "Contacted" : "Closed"}
                     </span>
                   </td>

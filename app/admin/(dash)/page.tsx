@@ -76,7 +76,7 @@ export default async function AdminListingsPage() {
                   <td>{l.price || "—"}</td>
                   <td>{l.photos.length || "—"}</td>
                   <td>
-                    <span className={l.status === "ACTIVE" ? "tag on" : "tag"}>
+                    <span className={l.status === "ACTIVE" ? "badge on" : "badge"}>
                       {l.status === "ACTIVE" ? "Active" : "Closed"}
                     </span>
                   </td>

@@ -17,7 +17,7 @@ export const revalidate = 600;
 export const metadata: Metadata = pageMeta({
   title: "Property Dealer on Noida Expressway",
   description:
-    "A property dealer working the Noida–Greater Noida Expressway from an office inside Sector 144. Eleven focus sectors, every kind of deal, both sides of the table.",
+    "A property dealer working the Noida–Greater Noida Expressway from an office inside Sector 144. Eleven focus sectors, both sides of every deal.",
   path: "/property-dealer-noida-expressway",
 });
 

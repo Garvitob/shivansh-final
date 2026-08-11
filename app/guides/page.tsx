@@ -10,7 +10,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Noida Property Guides",
   description:
-    "Plain answers to the property questions people actually ask us in Noida — stamp duty, document checks, circle rates, selling, leasing, renting and opening a cafe.",
+    "Plain answers to the property questions people ask us in Noida — stamp duty, document checks, circle rates, selling, leasing and renting.",
   path: "/guides",
 });
 

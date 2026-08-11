@@ -13,7 +13,7 @@ import { BUSINESS } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "Property Dealer in Noida — Shivansh Properties",
   description:
-    "One stop for every property need in Noida since 2011. Buying, selling, renting and leasing — flats, kothis, plots, offices, shops and cafe spaces. Sector 144 office.",
+    "One stop for every property need in Noida since 2011. Buying, selling, renting and leasing — flats, kothis, plots, offices, shops and cafe spaces.",
   path: "/",
 });
 

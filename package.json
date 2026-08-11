@@ -16,7 +16,8 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "qa:screens": "node scripts/qa-screens.mjs",
-    "qa:links": "node scripts/qa-links.mjs"
+    "qa:links": "node scripts/qa-links.mjs",
+    "qa:e2e": "node scripts/qa-e2e.mjs"
   },
   "dependencies": {
     "@prisma/client": "6.19.3",

@@ -37,7 +37,7 @@ export const GUIDES: Guide[] = [
     rowTitle: "Stamp duty and registration in Noida — how it works",
     metaTitle: "Stamp Duty & Registration in Noida",
     metaDescription:
-      "How stamp duty and registration actually work when you buy property in Noida — what the duty is charged on, what happens at the sub-registrar, and what to budget for.",
+      "How stamp duty and registration work when you buy property in Noida — what the duty is charged on and what happens at the sub-registrar.",
     eyebrow: "Guide · Buying",
     h1: "Stamp duty and registration in Noida",
     lede: "Two separate costs, one afternoon at the sub-registrar. Here is how the process runs and what decides the amount — without quoting a rate that will be out of date by the time you read it.",
@@ -149,7 +149,7 @@ export const GUIDES: Guide[] = [
     rowTitle: "How to verify property documents in UP before buying",
     metaTitle: "Verify Property Documents in UP",
     metaDescription:
-      "The document checks to make before you pay for property in Uttar Pradesh — title chain, mutation, Authority dues, society NOC, and the boundary on the ground.",
+      "The document checks to make before you pay for property in Uttar Pradesh — title chain, mutation, Authority dues and the boundary on the ground.",
     eyebrow: "Guide · Buying",
     h1: "Verifying property documents in UP",
     lede: "Almost every property problem we have seen was visible in the papers before the money moved. This is the checklist, in the order we work through it.",
@@ -397,7 +397,7 @@ export const GUIDES: Guide[] = [
     rowTitle: "Circle rates in Noida — what they are and why they matter",
     metaTitle: "Circle Rates in Noida Explained",
     metaDescription:
-      "What a circle rate is, how it sets the minimum value for stamp duty in Noida, why it varies within a sector, and what to do when it sits above market price.",
+      "What a circle rate is, how it sets the minimum value for stamp duty in Noida, and what to do when it sits above the price you agreed.",
     eyebrow: "Guide · Buying & selling",
     h1: "Circle rates in Noida",
     lede: "The circle rate is the government's minimum value for a property. It decides your stamp duty even when it has nothing to do with what you paid.",
@@ -824,7 +824,7 @@ export const GUIDES: Guide[] = [
     rowTitle: "Renting out a flat in Noida — the process",
     metaTitle: "How to Rent Out a Flat in Noida",
     metaDescription:
-      "Renting out a flat in Noida — setting the rent, preparing the place, checking tenants, the agreement, police verification and a handover that avoids arguments.",
+      "Renting out a flat in Noida — setting the rent, checking tenants, the agreement, police verification and a handover that avoids arguments.",
     eyebrow: "Guide · Renting",
     h1: "Renting out a flat in Noida",
     lede: "A good tenant who stays three years beats a slightly higher rent from one who leaves in seven months. Almost everything below follows from that.",

@@ -10,7 +10,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "What We Handle in Noida",
   description:
-    "Every kind of property work in Noida under one roof — buying, selling, renting, commercial leasing, industrial, PG buildings, cafes and corporate site finding.",
+    "Every kind of property work in Noida under one roof — buying, selling, renting, commercial leasing, industrial, PG buildings and cafes.",
   path: "/services",
 });
 

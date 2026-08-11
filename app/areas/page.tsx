@@ -11,7 +11,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Areas We Serve in Noida & NCR",
   description:
-    "All of Noida, with eleven focus sectors on the Expressway, plus Greater Noida, YEIDA and Delhi NCR. Where Shivansh Properties works and how deep the coverage goes.",
+    "All of Noida, with eleven focus sectors on the Expressway, plus Greater Noida, YEIDA and Delhi NCR. Where we work and how deep the coverage goes.",
   path: "/areas",
 });
 
