@@ -438,7 +438,10 @@ header.site-header {
 .hero-inner {
   position: relative;
   z-index: 2;
-  padding: 120px 0 140px;
+  /* Longhand on purpose: shorthand here would wipe out .wrap's side padding
+     and let the hero text run to the edge of the screen. */
+  padding-top: 120px;
+  padding-bottom: 140px;
   max-width: 900px;
   color: var(--ivory);
 }
@@ -1914,7 +1917,8 @@ footer.site-footer {
     min-height: 72vh;
   }
   .hero-inner {
-    padding: 88px 0 104px;
+    padding-top: 88px;
+    padding-bottom: 104px;
   }
   .svc-grid {
     grid-template-columns: 1fr;
@@ -1933,6 +1937,14 @@ footer.site-footer {
   }
   .photo-band {
     height: 340px;
+  }
+  /* Space-between leaves a stray separator dangling once this wraps. */
+  .facts-inner {
+    justify-content: flex-start;
+    gap: 8px 22px;
+  }
+  .facts-inner .dot {
+    display: none;
   }
   .roast-grid {
     grid-template-columns: 1fr;
@@ -2000,6 +2012,16 @@ footer.site-footer {
   .hero h1 {
     font-size: clamp(38px, 10vw, 52px);
     max-width: 100%;
+  }
+  /* Keep the hero actions clear of the photo credit pinned to the bottom. */
+  .hero-inner {
+    padding-top: 76px;
+    padding-bottom: 128px;
+  }
+  .hero-credit {
+    right: 20px;
+    bottom: 12px;
+    font-size: 9.5px;
   }
   .page-hero {
     padding: 40px 0 56px;

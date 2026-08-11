@@ -15,3 +15,5 @@ next-env.d.ts
 /qa-screens
 qa-report.txt
 qa-e2e.log
+qa-server.log
+qa-screens.log

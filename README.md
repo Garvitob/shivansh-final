@@ -49,8 +49,17 @@ business that isn't true.
 
 ## QA
 
+Start the built app first (`npm run build && npm run start`), then:
+
 ```bash
-npm run build
-npm run qa:links         # crawls every internal link, reports 404s and console errors
+npm run typecheck        # tsc --noEmit — Vercel will not build with type errors
+npm run qa:links         # every route: links, console errors, failed requests, head tags,
+                         # JSON-LD, one h1, horizontal overflow at 375/768/1440
+npm run qa:e2e           # admin guard, login, listing lifecycle, enquiries from three pages
 npm run qa:screens       # full-page screenshots, 375/768/1440, light + dark, into /qa-screens
+npm run qa:spot -- / 375 dark .hero    # readable viewport crop of one section
+npm run qa:photos        # contact sheet of every photo, to check alt text honestly
 ```
+
+`qa:links` writes `qa-report.txt` and `qa:e2e` writes `qa-e2e.log` as they run, so a long
+pass stays visible. Both exit non-zero when they find something.

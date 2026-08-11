@@ -84,7 +84,7 @@ try {
 
   /* ------------------------------------------------------------ admin login */
   step("admin login");
-  const { ctx: adminCtx, page: admin } = await newPage();
+  const { page: admin } = await newPage();
   {
     await admin.goto(`${BASE}/admin/login`, { waitUntil: "domcontentloaded" });
     await admin.fill("#email", process.env.ADMIN_EMAIL ?? "");

@@ -7,4 +7,21 @@
    - Network:      http://192.168.29.76:3000
 
  ✓ Starting...
- ✓ Ready in 545ms
+ ✓ Ready in 518ms
+node.exe : [blob] upload failed: Error: Vercel Blob: Cannot use public access on a private store. The store is 
+configured with private access.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([blob] upload f...private access.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    at au (C:\shivanshpropfinal\.next\server\app\api\blob\upload\route.js:58:12607)
+    at async A.retries (C:\shivanshpropfinal\.next\server\app\api\blob\upload\route.js:58:15111)
+    at async av (C:\shivanshpropfinal\.next\server\app\api\blob\upload\route.js:58:14283)
+    at async aG.allowedOptions (C:\shivanshpropfinal\.next\server\app\api\blob\upload\route.js:58:23170)
+    at async aJ (C:\shivanshpropfinal\.next\server\app\api\blob\upload\route.js:58:24804)
+    at async l (C:\shivanshpropfinal\.next\server\app\api\blob\upload\route.js:58:28096)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }

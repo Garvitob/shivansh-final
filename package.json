@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "postinstall": "prisma generate",
     "fetch:images": "node scripts/fetch-images.mjs",
@@ -17,7 +17,9 @@
     "db:seed": "tsx prisma/seed.ts",
     "qa:screens": "node scripts/qa-screens.mjs",
     "qa:links": "node scripts/qa-links.mjs",
-    "qa:e2e": "node scripts/qa-e2e.mjs"
+    "qa:e2e": "node scripts/qa-e2e.mjs",
+    "qa:spot": "node scripts/qa-spot.mjs",
+    "qa:photos": "node scripts/qa-contact-sheet.mjs"
   },
   "dependencies": {
     "@prisma/client": "6.19.3",
@@ -31,6 +33,7 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "3.2.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "22.10.5",
     "@types/react": "19.2.0",
