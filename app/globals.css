@@ -738,17 +738,20 @@ header.site-header {
   color: var(--brass);
 }
 
+/* Tight to the numeral and in brass, so it reads as part of the 144 rather than
+   a stray word floating in the gap before 145. */
 .sector-wall a.home sup {
   font-family: var(--font-archivo), sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
   position: absolute;
-  top: 0.9em;
-  right: -6px;
+  top: 0.3em;
+  right: -3px;
   transform: translateX(100%);
-  color: var(--muted);
+  color: var(--brass-soft);
+  white-space: nowrap;
 }
 
 /* The superscript hangs outside the numeral, so the wall needs room for it

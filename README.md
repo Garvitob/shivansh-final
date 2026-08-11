@@ -24,6 +24,37 @@ npm run db:seed          # creates the admin user from ADMIN_EMAIL / ADMIN_PASSW
 npm run dev
 ```
 
+### Deploying to Vercel
+
+Set these in **Project → Settings → Environment Variables**. The app renders
+without them, which is exactly what makes them easy to forget — with no
+`DATABASE_URL` the site looks fine but the enquiry form fails and no listing ever
+appears, and with no `AUTH_SECRET` every `/api/auth/*` route returns
+"There was a problem with the server configuration".
+
+| Set on Vercel | Why |
+| --- | --- |
+| `DATABASE_URL` | enquiries, listings, admin |
+| `AUTH_SECRET` | admin sign in |
+| `NEXT_PUBLIC_SITE_URL` | canonicals, sitemap, OpenGraph |
+| `BLOB_READ_WRITE_TOKEN` | listing photo uploads |
+| `NEXT_PUBLIC_GA_ID` | optional |
+| `RESEND_API_KEY`, `NOTIFY_EMAIL` | optional |
+
+**Do not set `NEXTAUTH_URL`** on Vercel — it is only for local development, and
+pointing it at localhost breaks the sign-in callback. `ADMIN_EMAIL` and
+`ADMIN_PASSWORD` are only read by the seed script, so they do not belong on
+Vercel either.
+
+To check a deployment from your machine:
+
+```bash
+npx tsx scripts/qa-live-env.ts https://your-site.vercel.app
+```
+
+It reports which of those variables the deployment is actually missing, by
+probing the live site rather than guessing.
+
 ### Environment
 
 | Variable | Required | Notes |

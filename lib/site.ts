@@ -3,10 +3,22 @@
  * Nothing about Shivansh Properties should be written anywhere else.
  */
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://shivanshproperties.com").replace(
-  /\/$/,
-  ""
-);
+/**
+ * Prefer the configured domain. If it is not set, fall back to the deployment's
+ * own production URL rather than a domain that may not be live yet — a wrong
+ * canonical is worse than an ugly one.
+ */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return explicit.replace(/\/$/, "");
+
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercel) return `https://${vercel.replace(/\/$/, "")}`;
+
+  return "https://shivanshproperties.com";
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 export const BUSINESS = {
   name: "Shivansh Properties",

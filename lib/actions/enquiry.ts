@@ -116,6 +116,11 @@ export async function submitEnquiry(
     });
   } catch (error) {
     console.error("[enquiry] could not be saved:", error);
+    if (!process.env.DATABASE_URL) {
+      console.error(
+        "[enquiry] DATABASE_URL is not set on this deployment — no enquiry can be stored."
+      );
+    }
     return {
       status: "error",
       message: `Something went wrong at our end. Please call ${BUSINESS.phoneShort} — we'll pick up.`,

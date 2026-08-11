@@ -10,6 +10,9 @@ import { Analytics } from "@/components/Analytics";
 import { BusinessJsonLd } from "@/components/JsonLd";
 import { OG_IMAGE } from "@/lib/seo";
 import { SITE_URL, BUSINESS } from "@/lib/site";
+import { reportEnvironment } from "@/lib/env";
+
+reportEnvironment();
 
 const fraunces = Fraunces({
   subsets: ["latin"],
