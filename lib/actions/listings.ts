@@ -6,6 +6,9 @@ import { z } from "zod";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { slugifyListing } from "@/lib/listings";
+import { SECTORS } from "@/lib/sectors";
+import { COMBOS } from "@/lib/combos";
+import { SERVICE_LISTING_FILTER } from "@/lib/services";
 
 export type ListingFormState = { error?: string };
 
@@ -35,11 +38,34 @@ async function requireAdmin() {
   if (!session?.user) redirect("/admin/login");
 }
 
-/** Listing content shows up on several page types — refresh the lot. */
-function revalidateEverything(slug?: string) {
-  revalidatePath("/", "layout");
+/**
+ * A listing can surface on its own page, the listings index, its sector page,
+ * the matching combination pages, the relevant service pages and the corridor
+ * page. Refresh exactly those rather than purging all 56 static pages.
+ */
+function revalidateForListing(listing: { slug: string; sector: string; propertyType: string }) {
   revalidatePath("/listings");
-  if (slug) revalidatePath(`/listings/${slug}`);
+  revalidatePath(`/listings/${listing.slug}`);
+  revalidatePath("/property-dealer-noida-expressway");
+  revalidatePath("/sitemap.xml");
+
+  const number = listing.sector.match(/\d+/)?.[0];
+  const sector = number ? SECTORS.find((s) => s.num === number) : undefined;
+  if (sector) revalidatePath(`/sectors/${sector.slug}`);
+
+  for (const combo of COMBOS) {
+    const sectorMatches = combo.sectorNum && combo.sectorNum === number;
+    const typeMatches = combo.listingType === listing.propertyType;
+    if ((sectorMatches && typeMatches) || (!combo.sectorNum && typeMatches)) {
+      revalidatePath(`/${combo.slug}`);
+    }
+  }
+
+  for (const [slug, filter] of Object.entries(SERVICE_LISTING_FILTER)) {
+    if (filter.propertyType === listing.propertyType || filter.purpose) {
+      revalidatePath(`/services/${slug}`);
+    }
+  }
 }
 
 async function uniqueSlug(title: string, sector: string, ignoreId?: string) {
@@ -95,7 +121,7 @@ export async function createListing(
     return { error: "Could not save the listing. Try again." };
   }
 
-  revalidateEverything(slug);
+  revalidateForListing({ slug, sector: data.sector, propertyType: data.propertyType });
   redirect("/admin");
 }
 
@@ -137,7 +163,7 @@ export async function updateListing(
     return { error: "Could not save the changes. Try again." };
   }
 
-  revalidateEverything(slug);
+  revalidateForListing({ slug, sector: data.sector, propertyType: data.propertyType });
   redirect("/admin");
 }
 
@@ -149,7 +175,7 @@ export async function setListingStatus(formData: FormData) {
 
   try {
     const listing = await prisma.listing.update({ where: { id }, data: { status } });
-    revalidateEverything(listing.slug);
+    revalidateForListing(listing);
   } catch (error) {
     console.error("[listing] status change failed:", error);
   }

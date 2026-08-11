@@ -21,6 +21,10 @@ export async function ensureServer() {
     return async () => {};
   }
 
+  if (process.env.QA_NO_SPAWN) {
+    throw new Error(`Nothing is serving ${BASE}. Start it with: npm run start`);
+  }
+
   console.log("Starting next start …");
   const child = spawn("npm", ["run", "start"], {
     stdio: ["ignore", "pipe", "pipe"],

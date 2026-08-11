@@ -14,11 +14,11 @@ import { pageMeta } from "@/lib/seo";
 export const revalidate = 600;
 
 /**
- * Only the ten authored combination pages resolve here — anything else falls
- * through to the designed 404.
+ * Only the ten authored combination pages resolve here — anything else calls
+ * notFound() below and gets the designed 404. This is done at request time
+ * rather than with dynamicParams:false, because that flag stops revalidatePath()
+ * from ever rebuilding the route.
  */
-export const dynamicParams = false;
-
 export function generateStaticParams() {
   return COMBOS.map((c) => ({ combo: c.slug }));
 }

@@ -32,7 +32,7 @@ npm run dev
 | `AUTH_SECRET` | yes | `openssl rand -base64 32` |
 | `NEXTAUTH_URL` | local only | `http://localhost:3000` |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | yes | used by the seed script only |
-| `BLOB_READ_WRITE_TOKEN` | yes | Vercel Blob, for listing photo uploads |
+| `BLOB_READ_WRITE_TOKEN` | yes | Vercel Blob, for listing photo uploads. **The store must be a public one** — listing photos are shown on a public website. A private store returns "Cannot use public access on a private store" and the admin surfaces that message. |
 | `NEXT_PUBLIC_SITE_URL` | yes | canonical origin, no trailing slash |
 | `NEXT_PUBLIC_GA_ID` | no | GA4 loads only when set |
 | `RESEND_API_KEY` + `NOTIFY_EMAIL` | no | enquiry email notifications, skipped silently when absent |

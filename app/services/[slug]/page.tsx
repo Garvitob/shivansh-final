@@ -7,17 +7,16 @@ import { RelatedLinks } from "@/components/RelatedLinks";
 import { EnquirySection } from "@/components/EnquirySection";
 import { ListingsStrip } from "@/components/ListingsStrip";
 import { ServiceJsonLd } from "@/components/JsonLd";
-import { SERVICES, getService } from "@/lib/services";
+import { SERVICES, getService, SERVICE_LISTING_FILTER } from "@/lib/services";
 import { getActiveListings } from "@/lib/listings";
 import { pageMeta } from "@/lib/seo";
 
 export const revalidate = 3600;
 
+/** See the note in app/sectors/[slug] — dynamicParams must stay on for ISR. */
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
 }
-
-export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -34,22 +33,12 @@ export async function generateMetadata({
   });
 }
 
-/** Which live listings, if any, belong on a given service page. */
-const LISTING_FILTER: Record<string, { propertyType?: string; purpose?: string }> = {
-  "buy-property-noida": { purpose: "SALE" },
-  "residential-renting-noida": { purpose: "RENT" },
-  "cafe-restaurant-spaces-noida": { propertyType: "CAFE_RESTAURANT" },
-  "industrial-spaces-noida": { propertyType: "INDUSTRIAL" },
-  "pg-spaces-noida": { propertyType: "PG" },
-  "commercial-leasing-noida": { purpose: "LEASE" },
-};
-
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) notFound();
 
-  const filter = LISTING_FILTER[service.slug];
+  const filter = SERVICE_LISTING_FILTER[service.slug];
   const listings = filter ? (await getActiveListings(filter)).slice(0, 6) : [];
 
   return (

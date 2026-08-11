@@ -2,7 +2,43 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { upload } from "@vercel/blob/client";
+
+const MAX_EDGE = 2000;
+const JPEG_QUALITY = 0.82;
+
+/**
+ * Phone photos run to several megabytes each, which is slow to upload and slow
+ * to serve. Resize and re-encode in the browser before anything leaves the
+ * device — a listing photo never needs to be bigger than this.
+ */
+async function shrink(file: File): Promise<File> {
+  if (typeof createImageBitmap !== "function") return file;
+
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+    const width = Math.round(bitmap.width * scale);
+    const height = Math.round(bitmap.height * scale);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return file;
+    ctx.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close?.();
+
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/jpeg", JPEG_QUALITY)
+    );
+    if (!blob) return file;
+
+    const name = file.name.replace(/\.[^.]+$/, "") || "photo";
+    return new File([blob], `${name}.jpg`, { type: "image/jpeg" });
+  } catch {
+    return file;
+  }
+}
 
 export function PhotoUploader({ initial = [] }: { initial?: string[] }) {
   const [urls, setUrls] = useState<string[]>(initial);
@@ -18,15 +54,21 @@ export function PhotoUploader({ initial = [] }: { initial?: string[] }) {
     setError(null);
     const added: string[] = [];
 
-    for (const file of files) {
+    for (const original of files) {
       try {
-        const blob = await upload(file.name, file, {
-          access: "public",
-          handleUploadUrl: "/api/blob/upload",
-        });
-        added.push(blob.url);
+        const file = await shrink(original);
+        const body = new FormData();
+        body.append("file", file);
+
+        const res = await fetch("/api/blob/upload", { method: "POST", body });
+        const data = (await res.json()) as { url?: string; error?: string };
+
+        if (!res.ok || !data.url) throw new Error(data.error || `Upload failed (${res.status})`);
+        added.push(data.url);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "That photo did not upload.");
+        setError(
+          `${original.name}: ${err instanceof Error ? err.message : "could not be uploaded"}`
+        );
       }
     }
 
@@ -47,7 +89,7 @@ export function PhotoUploader({ initial = [] }: { initial?: string[] }) {
         <div className="gallery" style={{ marginBottom: 12 }}>
           {urls.map((url) => (
             <figure key={url}>
-              <Image src={url} alt="" fill sizes="200px" style={{ objectFit: "cover" }} />
+              <Image src={url} alt="" fill sizes="220px" style={{ objectFit: "cover" }} />
               <button
                 type="button"
                 className="btn-mini"
@@ -70,10 +112,10 @@ export function PhotoUploader({ initial = [] }: { initial?: string[] }) {
         onChange={onPick}
         disabled={busy}
       />
-      <span className="form-note">
+      <span className="form-note" data-uploading={busy ? "yes" : "no"}>
         {busy
           ? "Uploading…"
-          : "Leave this empty if you have no photos — the listing still looks fine without them."}
+          : "Photos are resized before upload. Leave this empty if you have none — the listing still looks fine without them."}
       </span>
       {error ? <span className="form-error">{error}</span> : null}
     </div>

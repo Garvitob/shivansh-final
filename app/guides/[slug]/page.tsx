@@ -9,8 +9,6 @@ import { ArticleJsonLd } from "@/components/JsonLd";
 import { GUIDES, getGuide } from "@/lib/guides";
 import { pageMeta } from "@/lib/seo";
 
-export const dynamicParams = false;
-
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }));
 }

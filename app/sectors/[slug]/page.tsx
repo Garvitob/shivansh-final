@@ -12,8 +12,12 @@ import { getListingsForSector } from "@/lib/listings";
 import { pageMeta } from "@/lib/seo";
 
 export const revalidate = 600;
-export const dynamicParams = false;
 
+/**
+ * dynamicParams stays on. With it off, revalidatePath() purges the prerendered
+ * entry and the route can never be rebuilt, so saving a listing would turn its
+ * sector page into a 404. Unknown slugs are handled by notFound() below.
+ */
 export function generateStaticParams() {
   return SECTORS.map((s) => ({ slug: s.slug }));
 }

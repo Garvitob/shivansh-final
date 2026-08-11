@@ -91,7 +91,7 @@ try {
     await admin.fill("#password", process.env.ADMIN_PASSWORD ?? "");
     await Promise.all([
       admin.waitForURL((u) => !u.pathname.includes("/admin/login"), { timeout: 30_000 }),
-      admin.click('button[type="submit"]'),
+      admin.click('.form-card button[type="submit"]'),
     ]).catch(() => {});
     if (admin.url().endsWith("/admin")) ok("admin signs in", admin.url());
     else fail("admin signs in", `landed on ${admin.url()}`);
@@ -126,12 +126,17 @@ try {
       .waitForFunction(() => document.querySelectorAll('input[name="photos"]').length > 0, {
         timeout: 30_000,
       })
-      .then(() => ok("photo uploads to Vercel Blob from the browser"))
-      .catch(() => fail("photo uploads to Vercel Blob from the browser", "no photo URL appeared"));
+      .then(() => ok("photo uploads to Vercel Blob"))
+      .catch(async () => {
+        const detail =
+          (await admin.locator(".form-error").first().textContent().catch(() => null)) ??
+          "no photo URL appeared";
+        fail("photo uploads to Vercel Blob", detail);
+      });
 
     await Promise.all([
       admin.waitForURL((u) => u.pathname === "/admin", { timeout: 30_000 }),
-      admin.click('button[type="submit"]'),
+      admin.click('.form-card button[type="submit"]'),
     ]).catch(() => {});
 
     const row = await prisma.listing.findFirst({ where: { title: TITLE } });
@@ -168,11 +173,17 @@ try {
       fail("listing detail page renders", `status ${detail?.status()}`);
     }
 
-    await page.goto(`${BASE}/sectors/sector-144-noida`, { waitUntil: "domcontentloaded" });
-    const onSector = await page.locator(`a[href="/listings/${createdSlug}"]`).count();
+    // The sector page is statically generated; revalidation may serve one stale
+    // response before the fresh render lands, so give it a second look.
+    let onSector = 0;
+    for (let attempt = 1; attempt <= 3 && !onSector; attempt++) {
+      await page.goto(`${BASE}/sectors/sector-144-noida`, { waitUntil: "domcontentloaded" });
+      onSector = await page.locator(`a[href="/listings/${createdSlug}"]`).count();
+      if (!onSector) await page.waitForTimeout(1500);
+    }
     onSector
       ? ok("listing appears in the Sector 144 strip")
-      : fail("listing appears in the Sector 144 strip", "strip did not render it");
+      : fail("listing appears in the Sector 144 strip", "strip did not render it after 3 tries");
 
     await pub.close();
   }
@@ -191,7 +202,19 @@ try {
     const { ctx, page } = await newPage();
 
     for (const r of routes) {
-      await page.goto(`${BASE}${r.path}`, { waitUntil: "domcontentloaded" });
+      const res = await page.goto(`${BASE}${r.path}`, { waitUntil: "domcontentloaded" });
+      if (!res || res.status() >= 400) {
+        fail(`enquiry submitted from ${r.path}`, `page returned ${res ? res.status() : "nothing"}`);
+        continue;
+      }
+      const form = await page
+        .waitForSelector("#f-name", { timeout: 20_000 })
+        .then(() => true)
+        .catch(() => false);
+      if (!form) {
+        fail(`enquiry submitted from ${r.path}`, "the enquiry form never rendered");
+        continue;
+      }
       await page.fill("#f-name", r.name);
       await page.fill("#f-phone", "9911559688");
       await page.fill("#f-sector", "Sector 144");
@@ -223,6 +246,26 @@ try {
           : fail("listing enquiry carries listingSlug", `got "${row.listingSlug}"`);
       }
     }
+  }
+
+  /* -------------------- revalidation must not break the pages it touches */
+  step("pages stay alive after revalidation");
+  {
+    const touched = [
+      "/sectors/sector-144-noida",
+      "/services/buy-property-noida",
+      "/property-dealer-noida-expressway",
+      "/listings",
+      "/sectors/sector-99-noida",
+    ];
+    const { ctx, page } = await newPage();
+    for (const path of touched) {
+      const res = await page.goto(`${BASE}${path}`, { waitUntil: "domcontentloaded" });
+      res && res.status() === 200
+        ? ok(`${path} still returns 200`)
+        : fail(`${path} still returns 200`, `got ${res ? res.status() : "nothing"}`);
+    }
+    await ctx.close();
   }
 
   /* ---------------------------------------------- mark closed removes it live */

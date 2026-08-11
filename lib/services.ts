@@ -856,3 +856,13 @@ export const SERVICES: Service[] = [
 export function getService(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);
 }
+
+/** Which live listings, if any, belong on a given service page. */
+export const SERVICE_LISTING_FILTER: Record<string, { propertyType?: string; purpose?: string }> = {
+  "buy-property-noida": { purpose: "SALE" },
+  "residential-renting-noida": { purpose: "RENT" },
+  "commercial-leasing-noida": { purpose: "LEASE" },
+  "cafe-restaurant-spaces-noida": { propertyType: "CAFE_RESTAURANT" },
+  "industrial-spaces-noida": { propertyType: "INDUSTRIAL" },
+  "pg-spaces-noida": { propertyType: "PG" },
+};
