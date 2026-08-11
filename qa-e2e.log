@@ -1,9 +1,0 @@
-
-> signed-out admin routes
-  ok   signed-out /admin redirects to login — http://localhost:3000/admin/login
-  ok   signed-out /admin/enquiries redirects to login
-
-> admin login
-  ok   admin signs in — http://localhost:3000/admin
-
-> create a listing (with a photo)
