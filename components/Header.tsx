@@ -5,15 +5,17 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { BUSINESS, MAIN_NAV, MOBILE_NAV } from "@/lib/site";
+import { BUSINESS, PHONES, MAIN_NAV, MOBILE_NAV } from "@/lib/site";
+import { SunIcon, MoonIcon } from "@/components/ThemeIcon";
 
-function useThemeLabel() {
+function useThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const isDark = mounted && theme === "dark";
   return {
-    label: isDark ? "Light" : "Dark",
+    isDark,
+    label: isDark ? "Switch to light mode" : "Switch to dark mode",
     toggle: () => setTheme(isDark ? "light" : "dark"),
   };
 }
@@ -32,7 +34,7 @@ function Wordmark({ muted }: { muted?: boolean }) {
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const { label, toggle } = useThemeLabel();
+  const { isDark, label, toggle } = useThemeToggle();
 
   useEffect(() => {
     setOpen(false);
@@ -84,8 +86,8 @@ export function Header() {
           </nav>
 
           <div className="nav-cta">
-            <button className="theme-toggle" onClick={toggle} aria-label="Switch colour theme">
-              {label}
+            <button className="theme-toggle" onClick={toggle} aria-label={label} title={label}>
+              {isDark ? <SunIcon /> : <MoonIcon />}
             </button>
             <a className="btn-call" href={BUSINESS.telHref}>
               <span className="btn-call-word">Call </span>
@@ -119,12 +121,19 @@ export function Header() {
             ))}
           </nav>
           <button className="mm-theme" onClick={toggle}>
-            {label} mode
+            {isDark ? <SunIcon size={15} /> : <MoonIcon size={15} />}
+            {isDark ? "Light mode" : "Dark mode"}
           </button>
           <div className="mm-foot">
             CM-52, Sector 144, Noida
             <br />
-            <a href={BUSINESS.telHref}>{BUSINESS.phoneShort}</a> ·{" "}
+            {PHONES.map((phone, i) => (
+              <span key={phone.e164}>
+                {i > 0 ? " · " : null}
+                <a href={phone.tel}>{phone.short}</a>
+              </span>
+            ))}
+            <br />
             <a href={BUSINESS.whatsappHref} target="_blank" rel="noopener">
               WhatsApp
             </a>

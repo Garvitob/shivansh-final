@@ -20,6 +20,37 @@ function resolveSiteUrl(): string {
 
 export const SITE_URL = resolveSiteUrl();
 
+/**
+ * All three lines. The first is the primary: it is the WhatsApp number, the one
+ * in the NAP block and the one in structured data, so it stays consistent with
+ * the Google Business Profile. The others are listed as additional lines.
+ */
+export const PHONES = [
+  {
+    display: "+91 99115 59688",
+    short: "99115 59688",
+    e164: "+919911559688",
+    tel: "tel:+919911559688",
+    whatsapp: true,
+  },
+  {
+    display: "+91 99115 50688",
+    short: "99115 50688",
+    e164: "+919911550688",
+    tel: "tel:+919911550688",
+    whatsapp: false,
+  },
+  {
+    display: "+91 94123 48687",
+    short: "94123 48687",
+    e164: "+919412348687",
+    tel: "tel:+919412348687",
+    whatsapp: false,
+  },
+] as const;
+
+export const PRIMARY_PHONE = PHONES[0];
+
 export const BUSINESS = {
   name: "Shivansh Properties",
   legalName: "Shivansh Properties",

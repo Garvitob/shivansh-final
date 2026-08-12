@@ -298,15 +298,15 @@ header.site-header {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   color: var(--muted);
-  font-family: inherit;
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 9px 12px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  flex-shrink: 0;
   transition: border-color 0.2s, color 0.2s;
-  min-width: 62px;
 }
 
 .theme-toggle:hover {
@@ -392,6 +392,9 @@ header.site-header {
   border-radius: var(--radius);
   cursor: pointer;
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
 }
 
 .mm-foot {
@@ -541,10 +544,12 @@ header.site-header {
   color: var(--brass-soft);
 }
 
+/* Left, at every width: the floating WhatsApp button owns the bottom-right
+   corner of the viewport and would sit on top of this. */
 .hero-credit {
   position: absolute;
   z-index: 2;
-  right: 24px;
+  left: 24px;
   bottom: 14px;
   font-size: 10.5px;
   color: rgba(246, 243, 235, 0.55);
@@ -1999,9 +2004,6 @@ footer.site-footer {
     padding-left: 20px;
     padding-right: 20px;
   }
-  .theme-toggle {
-    display: none;
-  }
   .btn-call .btn-call-word {
     display: none;
   }
@@ -2033,10 +2035,8 @@ footer.site-footer {
     padding-top: 76px;
     padding-bottom: 128px;
   }
-  /* Sits left on a phone so the floating WhatsApp button cannot cover it. */
   .hero-credit {
     left: 20px;
-    right: auto;
     bottom: 12px;
     font-size: 9.5px;
   }
@@ -2064,6 +2064,14 @@ footer.site-footer {
   }
   .band-caption {
     padding: 60px 0 20px;
+  }
+}
+
+/* Below this the header row cannot hold the toggle as well as the call button
+   and the menu. It stays available inside the mobile menu. */
+@media (max-width: 480px) {
+  .theme-toggle {
+    display: none;
   }
 }
 

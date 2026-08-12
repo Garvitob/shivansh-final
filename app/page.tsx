@@ -151,7 +151,7 @@ export default function HomePage() {
           <div className="svc-left">
             <p className="eyebrow">What we handle</p>
             <h2 className="h2">If it&apos;s property in Noida, it&apos;s our work.</h2>
-            <p className="sub">No handing you off. One office, one number, every kind of deal.</p>
+            <p className="sub">No handing you off. One office, one team, every kind of deal.</p>
           </div>
           <div className="svc-rows">
             {SERVICES.map((s) => (

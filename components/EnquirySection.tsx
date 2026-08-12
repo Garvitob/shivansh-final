@@ -1,6 +1,6 @@
 import { EnquiryForm, type EnquiryFormProps } from "@/components/EnquiryForm";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import { BUSINESS } from "@/lib/site";
+import { BUSINESS, PHONES } from "@/lib/site";
 
 type Props = EnquiryFormProps & {
   eyebrow?: string;
@@ -23,7 +23,11 @@ export function EnquirySection({
           <h2>{heading}</h2>
           <p>{blurb}</p>
           <div className="enq-contact">
-            <a href={BUSINESS.telHref}>{BUSINESS.phoneShort} — call</a>
+            {PHONES.map((phone) => (
+              <a key={phone.e164} href={phone.tel}>
+                {phone.short} — call
+              </a>
+            ))}
             <a href={BUSINESS.whatsappHref} target="_blank" rel="noopener" className="foot-wa">
               <WhatsAppIcon size={15} />
               {BUSINESS.phoneShort} — WhatsApp

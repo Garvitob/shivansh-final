@@ -6,7 +6,7 @@ import { RelatedLinks } from "@/components/RelatedLinks";
 import { FaqBlock } from "@/components/FaqBlock";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { pageMeta } from "@/lib/seo";
-import { BUSINESS } from "@/lib/site";
+import { BUSINESS, PHONES } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact Shivansh Properties",
@@ -18,7 +18,7 @@ export const metadata: Metadata = pageMeta({
 const FAQS = [
   {
     q: "What are the best ways to reach you?",
-    a: "Call or WhatsApp +91 99115 59688. Both reach the same team. If you would rather write, leave your number in the form on this page and we will ring you back — most questions are quicker to settle in two minutes on a call.",
+    a: "Call any of our three lines — 99115 59688, 99115 50688 or 94123 48687 — or message us on WhatsApp at 99115 59688. All of them reach the same team. If you would rather write, leave your number in the form and we will ring you back.",
   },
   {
     q: "Can I come to the office without an appointment?",
@@ -44,7 +44,7 @@ export default function ContactPage() {
             Contact
           </p>
           <h1>
-            One office. <em>One number.</em>
+            One office. <em>The same people every time.</em>
           </h1>
           <div className="lede">
             <p>
@@ -99,9 +99,13 @@ export default function ContactPage() {
               <div>
                 <dt>Phone</dt>
                 <dd>
-                  <a href={BUSINESS.telHref} className="link-plain">
-                    {BUSINESS.phoneDisplay}
-                  </a>
+                  {PHONES.map((phone) => (
+                    <span key={phone.e164} style={{ display: "block", marginBottom: 6 }}>
+                      <a href={phone.tel} className="link-plain">
+                        {phone.display}
+                      </a>
+                    </span>
+                  ))}
                 </dd>
               </div>
               <div>

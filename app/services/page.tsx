@@ -26,7 +26,7 @@ export default function ServicesIndexPage() {
         }
         lede={
           <p>
-            Nine kinds of work, one office and one number. We do not hand you off to somebody else
+            Nine kinds of work, one office and one team. We do not hand you off to somebody else
             halfway through, and we work both sides of every deal — which is the only way to know
             what a fair number actually looks like.
           </p>

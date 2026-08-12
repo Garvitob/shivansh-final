@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import { BUSINESS, FOOTER_SERVICES, FOOTER_SECTORS, FOOTER_MORE } from "@/lib/site";
+import { BUSINESS, PHONES, FOOTER_SERVICES, FOOTER_SECTORS, FOOTER_MORE } from "@/lib/site";
 
 function Col({
   label,
@@ -40,8 +40,18 @@ export function Footer() {
               <br />
               Uttar Pradesh 201306, India
               <br />
-              <a href={BUSINESS.telHref}>{BUSINESS.phoneDisplay}</a> ·{" "}
-              <a className="foot-wa" href={BUSINESS.whatsappHref} target="_blank" rel="noopener">
+              {PHONES.map((phone) => (
+                <span key={phone.e164} style={{ display: "block", marginTop: 4 }}>
+                  <a href={phone.tel}>{phone.display}</a>
+                </span>
+              ))}
+              <a
+                className="foot-wa"
+                href={BUSINESS.whatsappHref}
+                target="_blank"
+                rel="noopener"
+                style={{ marginTop: 8 }}
+              >
                 <WhatsAppIcon size={14} />
                 WhatsApp
               </a>

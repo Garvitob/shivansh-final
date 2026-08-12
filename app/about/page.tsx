@@ -6,7 +6,7 @@ import { FaqBlock } from "@/components/FaqBlock";
 import { RelatedLinks } from "@/components/RelatedLinks";
 import { EnquirySection } from "@/components/EnquirySection";
 import { pageMeta } from "@/lib/seo";
-import { BUSINESS, FOCUS_SECTORS } from "@/lib/site";
+import { BUSINESS, PHONES, PRIMARY_PHONE, FOCUS_SECTORS } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "About Shivansh Properties, Noida",
@@ -22,7 +22,8 @@ const FACTS = [
   { k: "Founded by", v: "The father of Mukul Kaushik" },
   { k: "Run today by", v: "Mukul Kaushik" },
   { k: "Office", v: "CM-52, Sector 144, Noida, Uttar Pradesh 201306, India" },
-  { k: "Phone & WhatsApp", v: "+91 99115 59688" },
+  { k: "Phone", v: PHONES.map((p) => p.display).join(", ") },
+  { k: "WhatsApp", v: PRIMARY_PHONE.display },
   { k: "Main area", v: "Noida — all sectors" },
   { k: "Focus sectors", v: `${FOCUS_SECTORS.join(", ")} — all on the Noida–Greater Noida Expressway` },
   { k: "Also serves", v: "Greater Noida, YEIDA and Delhi NCR" },
@@ -77,7 +78,7 @@ export default function AboutPage() {
           <div className="ed-side">
             <p className="eyebrow">The business</p>
             <h2>{BUSINESS.tagline}</h2>
-            <p>Two generations, one office, one number.</p>
+            <p>Two generations, one office, one team.</p>
             <dl className="facts-table" style={{ marginTop: 30 }}>
               {FACTS.map((f) => (
                 <div key={f.k}>

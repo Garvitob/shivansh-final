@@ -1,4 +1,4 @@
-import { BUSINESS, SITE_URL, AREAS_SERVED, FOCUS_SECTORS } from "@/lib/site";
+import { BUSINESS, PHONES, SITE_URL, AREAS_SERVED, FOCUS_SECTORS } from "@/lib/site";
 import type { Crumb } from "@/lib/seo";
 
 type Json = Record<string, unknown>;
@@ -58,13 +58,13 @@ export function BusinessJsonLd() {
       ...FOCUS_SECTORS.map((n) => ({ "@type": "Place", name: `Sector ${n}, Noida` })),
     ],
     knowsLanguage: ["en", "hi"],
-    contactPoint: {
+    contactPoint: PHONES.map((phone) => ({
       "@type": "ContactPoint",
-      telephone: BUSINESS.phoneE164,
+      telephone: phone.e164,
       contactType: "sales",
       areaServed: "IN",
       availableLanguage: ["English", "Hindi"],
-    },
+    })),
   };
   return <Script id="ld-business" data={data} />;
 }
